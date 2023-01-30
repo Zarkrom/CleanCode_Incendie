@@ -10,7 +10,7 @@ describe('Plot', () => {
         expect(plot.isBurning()).toBeFalsy();
     });
 
-
+    // test('Plot can be set on fire', () => {
 
 
 
