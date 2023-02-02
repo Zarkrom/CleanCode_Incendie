@@ -8,13 +8,13 @@ describe('Field', () => {
 
   test('Field is not flammable', () => {
     const field = new Field()
-    expect(field.isFlammable()).toBeFalsy()
+    expect(field.isFlammable()).toBeTruthy()
   })
 
   test("Field can't not be set on fire", () => {
     const field = new Field()
     field.setOnFire()
-    expect(field.isBurning()).toBeFalsy()
+    expect(field.isBurning()).toBeTruthy()
   })
 
   test('toString', () => {

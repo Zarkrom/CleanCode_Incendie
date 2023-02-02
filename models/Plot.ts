@@ -15,21 +15,21 @@ export default abstract class Plot {
     this.burning = false
   }
 
-  toString(): string {
+  public toString(): string {
     return (
       Number(this.flammable).toString() + ' ' + Number(this.burning).toString()
     )
   }
 
-  setOnFire(): void {
+  public setOnFire(): void {
     if (this.flammable) this.burning = true
   }
 
-  isFlammable(): boolean {
+  public isFlammable(): boolean {
     return this.flammable
   }
 
-  isBurning(): boolean {
+  public isBurning(): boolean {
     return this.burning
   }
 }
