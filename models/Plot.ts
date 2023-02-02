@@ -1,32 +1,35 @@
 // Plot is a part of the Area,
 // It has four types: Forest, Building, Field and Water
 // It can be flammable or not and can be set on fire
-export abstract class Plot {
-    protected flammable: boolean;
-    protected burning: boolean;
-    public abstract color: string;
+export default abstract class Plot {
+  protected flammable: boolean = false
 
-    /**
-     * Plot is a small division of Area. It can be set on fire if it is flammable
-     * @constructor
-     */
-    protected constructor() {
-        this.burning = false;
-    }
+  protected burning: boolean = false
+  public abstract color: string
 
-    toString(): string {
-        return Number(this.flammable).toString() + ' ' + Number(this.burning).toString();
-    }
+  /**
+   * Plot is a small division of Area. It can be set on fire if it is flammable
+   * @constructor
+   */
+  protected constructor() {
+    this.burning = false
+  }
 
-    setOnFire(): void {
-        if (this.flammable) this.burning = true;
-    }
+  toString(): string {
+    return (
+      Number(this.flammable).toString() + ' ' + Number(this.burning).toString()
+    )
+  }
 
-    isFlammable(): boolean {
-        return this.flammable;
-    }
+  setOnFire(): void {
+    if (this.flammable) this.burning = true
+  }
 
-    isBurning(): boolean {
-        return this.burning;
-    }
+  isFlammable(): boolean {
+    return this.flammable
+  }
+
+  isBurning(): boolean {
+    return this.burning
+  }
 }
