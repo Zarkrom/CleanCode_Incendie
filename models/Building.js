@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,9 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-exports.Building = void 0;
-var Plot_1 = require("./Plot");
+import { Plot } from "./Plot";
 var Building = /** @class */ (function (_super) {
     __extends(Building, _super);
     function Building() {
@@ -24,6 +21,13 @@ var Building = /** @class */ (function (_super) {
         _this.flammable = true;
         return _this;
     }
+    Building.prototype.toString = function () {
+        return "Building:" + _super.prototype.toString.call(this);
+    };
+    Building.prototype.test = function () {
+        return true;
+    };
     return Building;
-}(Plot_1.Plot));
-exports.Building = Building;
+}(Plot));
+export { Building };
+//# sourceMappingURL=Building.js.map

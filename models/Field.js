@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,9 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-exports.Field = void 0;
-var Plot_1 = require("./Plot");
+import { Plot } from "./Plot";
 var Field = /** @class */ (function (_super) {
     __extends(Field, _super);
     function Field() {
@@ -24,6 +21,10 @@ var Field = /** @class */ (function (_super) {
         _this.flammable = false;
         return _this;
     }
+    Field.prototype.toString = function () {
+        return "Field:" + _super.prototype.toString.call(this);
+    };
     return Field;
-}(Plot_1.Plot));
-exports.Field = Field;
+}(Plot));
+export { Field };
+//# sourceMappingURL=Field.js.map

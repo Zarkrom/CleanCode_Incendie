@@ -9,4 +9,8 @@ export class Building extends Plot {
     toString(): string {
         return "Building:" + super.toString();
     }
+
+    public test(): boolean {
+        return true
+    }
 }

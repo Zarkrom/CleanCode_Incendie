@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,9 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-exports.Forest = void 0;
-var Plot_1 = require("./Plot");
+import { Plot } from "./Plot";
 var Forest = /** @class */ (function (_super) {
     __extends(Forest, _super);
     function Forest() {
@@ -24,6 +21,10 @@ var Forest = /** @class */ (function (_super) {
         _this.flammable = true;
         return _this;
     }
+    Forest.prototype.toString = function () {
+        return "Forest:" + _super.prototype.toString.call(this);
+    };
     return Forest;
-}(Plot_1.Plot));
-exports.Forest = Forest;
+}(Plot));
+export { Forest };
+//# sourceMappingURL=Forest.js.map

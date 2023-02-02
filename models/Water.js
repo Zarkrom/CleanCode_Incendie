@@ -1,4 +1,3 @@
-"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,9 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-exports.__esModule = true;
-exports.Water = void 0;
-var Plot_1 = require("./Plot");
+import { Plot } from "./Plot";
 var Water = /** @class */ (function (_super) {
     __extends(Water, _super);
     function Water() {
@@ -24,6 +21,10 @@ var Water = /** @class */ (function (_super) {
         _this.flammable = false;
         return _this;
     }
+    Water.prototype.toString = function () {
+        return "Water:" + _super.prototype.toString.call(this);
+    };
     return Water;
-}(Plot_1.Plot));
-exports.Water = Water;
+}(Plot));
+export { Water };
+//# sourceMappingURL=Water.js.map
