@@ -55,3 +55,8 @@ td {
 body {
     background-color: #000;
 }
+
+h1 {
+    color: white;
+    font-size: 3rem;
+}

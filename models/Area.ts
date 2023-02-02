@@ -1,14 +1,16 @@
 import {Plot} from "./Plot";
-import {Building} from "./Building";
+import {Moutain} from "./Moutain";
 import {Field} from "./Field";
 import {Water} from "./Water";
 import {Forest} from "./Forest";
 import {Wind} from "./Wind";
 import {Direction} from "./Direction";
+import {createNoise2D, NoiseFunction2D} from "simplex-noise";
 
 export class Area {
     private readonly _size: number;
     private _plots: Plot[][] = []; // grid of plots
+    private readonly _noiseFunction: NoiseFunction2D;
 
     /**
      * An area contains a grid of plots.
@@ -17,16 +19,16 @@ export class Area {
      */
     constructor(size: number) {
         this._size = size;
+        this._noiseFunction = createNoise2D();
         for (let x = 0; x < this._size; x++) {
             const line = [];
             const tr = document.createElement('tr');
 
             for (let y = 0; y < this._size; y++) {
-                const plot = this.getRandomPlot();
+                const plot = this.getRandomPlot(x, y);
                 line.push(plot);
                 const td = document.createElement('td');
                 td.setAttribute('id', `${x}.${y}`);
-                // td.innerHTML = plot.toString();
                 td.style.backgroundColor = plot.isBurning() ? '#e25822' : plot.color;
                 tr.appendChild(td);
             }
@@ -43,8 +45,10 @@ export class Area {
             for (const plot of line) {
                 const x = this._plots.indexOf(line)
                 const y = line.indexOf(plot)
-                // document.getElementById(`${x}.${y}`).innerHTML = plot.toString();
-                document.getElementById(`${x}.${y}`).style.backgroundColor = plot.isBurning() ? '#e25822' : plot.color;
+                const randomBurningColor = ['#e25822','#ff9449','#f55332','#ffc754'][Math.floor(Math.random() * 4)]
+                document.getElementById(`${x}.${y}`).style.backgroundColor = plot.isBurning() ?
+                    randomBurningColor :
+                    plot.color;
             }
         }
     }
@@ -58,8 +62,6 @@ export class Area {
         const randomY = Math.floor(Math.random() * this._size);
         let randomPlot = this._plots[randomX][randomY];
 
-        console.log(randomPlot)
-
         if(randomPlot.isFlammable() == false || randomPlot.isBurning() == true){
             this.setFireRandomly();
         }   else {
@@ -67,17 +69,24 @@ export class Area {
         }
     }
 
-    getRandomPlot(): Plot {
-        const allPlots: Plot[] = [
-            new Building(),
-            new Building(),
-            new Field(),
-            new Water(),
-            new Forest(),
-            new Forest(),
-        ];
-        const randomType = Math.floor(Math.random() * 5);
-        return allPlots[randomType];
+    /**
+     * get random plot
+     * @param {number} x - x coord of the plot
+     * @param {number} y - y coord of the plot
+     */
+    getRandomPlot(x: number, y: number): Plot {
+        // Get value from 0 to 1 generated from x and y by a noise
+        const zoom = 10;
+        const random = this._noiseFunction((x/this._size - 0.5) * zoom, ((y/this._size - 0.5) * zoom)) / 2 + 0.5;
+        if(random <= 0.15){
+            return new Water();
+        } else if(random <= 0.3){
+            return new Field();
+        } else if(random <= 0.75){
+            return new Forest();
+        } else {
+            return new Moutain();
+        }
     }
 
     /**

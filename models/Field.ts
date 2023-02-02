@@ -5,6 +5,6 @@ export class Field extends Plot {
 
     public constructor() {
         super();
-        this.flammable = false;
+        this.flammable = true;
     }
 }
