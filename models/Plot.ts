@@ -3,7 +3,6 @@
 // It can be flammable or not and can be set on fire
 export default abstract class Plot {
   protected flammable: boolean = false
-
   protected burning: boolean = false
   public abstract color: string
 

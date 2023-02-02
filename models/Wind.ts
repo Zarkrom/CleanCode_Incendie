@@ -8,7 +8,7 @@ export class Wind {
    * @constructor
    * @param {EDirection[]} directions - directions of wind. By default, wind has all directions
    */
-  protected constructor(...directions: EDirection[]) {
+  public constructor(...directions: EDirection[]) {
     if (directions.length === 0) {
       this._directions = [
         EDirection.NORTH,
