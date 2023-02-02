@@ -2,7 +2,8 @@
   "compilerOptions": {
     "module": "es6",
     "sourceMap": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "outDir": "build",
   },
   "exclude": [
     "node_modules"
