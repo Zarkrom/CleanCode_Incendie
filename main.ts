@@ -2,9 +2,9 @@ import {Area} from "./models/Area";
 import {Wind} from "./models/Wind";
 import {Direction} from "./models/Direction";
 
-const area: Area = new Area(10);
+const area: Area = new Area(100);
 
-for (let i = 0; i < 1; i++) {
+for (let i = 0; i < 25; i++) {
     area.setFireRandomly();
 }
 

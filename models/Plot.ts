@@ -5,6 +5,8 @@ export abstract class Plot {
     protected flammable: boolean;
     protected burning: boolean;
 
+    public abstract color: string;
+
     protected constructor() {
         this.burning = false;
     }

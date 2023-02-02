@@ -1,12 +1,10 @@
 import {Plot} from "./Plot";
 
 export class Building extends Plot {
-    constructor() {
+    public color: string = "#a5a5a5";
+
+    public constructor() {
         super();
         this.flammable = true;
-    }
-
-    toString(): string {
-        return 'Building';
     }
 }
