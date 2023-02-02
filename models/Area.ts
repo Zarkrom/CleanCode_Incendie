@@ -6,20 +6,22 @@ import {Forest} from "./Forest";
 import {Wind} from "./Wind";
 import {Direction} from "./Direction";
 
-// Area contains a board of plots
 export class Area {
-    size: number;
-    plots: Plot[][] = []; // grid of plots
+    private readonly _size: number;
+    private _plots: Plot[][] = []; // grid of plots
 
+    /**
+     * An area contains a grid of plots.
+     * @constructor
+     * @param {number} size - size of the grid
+     */
     constructor(size: number) {
-        // Generate a random area
-        // For each plot, add a random plot in plots
-        this.size = size;
-        for (let x = 0; x < this.size; x++) {
+        this._size = size;
+        for (let x = 0; x < this._size; x++) {
             const line = [];
             const tr = document.createElement('tr');
 
-            for (let y = 0; y < this.size; y++) {
+            for (let y = 0; y < this._size; y++) {
                 const plot = this.getRandomPlot();
                 line.push(plot);
                 const td = document.createElement('td');
@@ -28,16 +30,18 @@ export class Area {
                 td.style.backgroundColor = plot.isBurning() ? 'red' : 'green';
                 tr.appendChild(td);
             }
-            this.plots.push(line);
+            this._plots.push(line);
             document.getElementById('area').appendChild(tr);
         }
     }
 
-
+    /**
+     * show area in DOM
+     */
     show(){
-        for (const line of this.plots) {
+        for (const line of this._plots) {
             for (const plot of line) {
-                const x = this.plots.indexOf(line)
+                const x = this._plots.indexOf(line)
                 const y = line.indexOf(plot)
                 document.getElementById(`${x}.${y}`).innerHTML = plot.toString();
                 document.getElementById(`${x}.${y}`).style.backgroundColor = plot.isBurning() ? 'red' : 'green';
@@ -45,13 +49,14 @@ export class Area {
         }
     }
 
-    // Choose a random plot
-    // If it's flammable, set it on fire
-    // If not, call function again and try on another plot
+    /**
+     * Set fire to a random plot in the grid
+     * Retry if the plot is not flammable
+     */
     setFireRandomly(): void {
-        const randomX = Math.floor(Math.random() * this.size);
-        const randomY = Math.floor(Math.random() * this.size);
-        let randomPlot = this.plots[randomX][randomY];
+        const randomX = Math.floor(Math.random() * this._size);
+        const randomY = Math.floor(Math.random() * this._size);
+        let randomPlot = this._plots[randomX][randomY];
 
         if(randomPlot.isFlammable() == false || randomPlot.isBurning() == true){
             this.setFireRandomly();
@@ -73,36 +78,36 @@ export class Area {
         return allPlots[randomType];
     }
 
-    // Get each fired plot of the area and spread fire around it
+    /**
+     * Spread fire around burning plots in grid depending on wind
+     * @param {Wind} wind - wind used to spread fire
+     */
     spreadFire(wind: Wind): void {
         const plotsToFire: Plot[] = [];
 
-        for (const line of this.plots) {
+        for (const line of this._plots) {
             for (const plot of line) {
                 if (plot.isBurning()) {
-                    const x = this.plots.indexOf(line);
+                    const x = this._plots.indexOf(line);
                     const y = line.indexOf(plot);
-                    // If wind is not set, fire spread in all directions
                     const fireDirections: Direction[] = wind.getDirections();
 
-                    // Fire will spread on plots near burning plots
                     if(fireDirections.includes(Direction.NORTH) && x != 0){
-                        plotsToFire.push(this.plots[x-1][y]);
+                        plotsToFire.push(this._plots[x-1][y]);
                     }
                     if(fireDirections.includes(Direction.EAST) && y != 0){
-                        plotsToFire.push(this.plots[x][y-1]);
+                        plotsToFire.push(this._plots[x][y-1]);
                     }
-                    if(fireDirections.includes(Direction.SOUTH) && x != this.plots.length-1){
-                        plotsToFire.push(this.plots[x+1][y]);
+                    if(fireDirections.includes(Direction.SOUTH) && x != this._plots.length-1){
+                        plotsToFire.push(this._plots[x+1][y]);
                     }
-                    if(fireDirections.includes(Direction.WEST) && y != this.plots[0].length-1){
-                        plotsToFire.push(this.plots[x][y+1]);
+                    if(fireDirections.includes(Direction.WEST) && y != this._plots[0].length-1){
+                        plotsToFire.push(this._plots[x][y+1]);
                     }
                 }
             }
         }
 
-        // Spread fire on new plots to not set fire recursively
         for (const plot of plotsToFire) {
             plot.setOnFire();
         }
