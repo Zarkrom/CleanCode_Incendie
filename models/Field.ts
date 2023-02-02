@@ -1,12 +1,10 @@
 import {Plot} from "./Plot";
 
 export class Field extends Plot {
-    constructor() {
+    public color: string = '#6c541e';
+
+    public constructor() {
         super();
         this.flammable = false;
-    }
-
-    toString(): string {
-        return 'Field';
     }
 }

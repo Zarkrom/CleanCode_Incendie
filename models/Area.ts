@@ -26,8 +26,8 @@ export class Area {
                 line.push(plot);
                 const td = document.createElement('td');
                 td.setAttribute('id', `${x}.${y}`);
-                td.innerHTML = plot.toString();
-                td.style.backgroundColor = plot.isBurning() ? 'red' : 'green';
+                // td.innerHTML = plot.toString();
+                td.style.backgroundColor = plot.isBurning() ? '#e25822' : plot.color;
                 tr.appendChild(td);
             }
             this._plots.push(line);
@@ -43,8 +43,8 @@ export class Area {
             for (const plot of line) {
                 const x = this._plots.indexOf(line)
                 const y = line.indexOf(plot)
-                document.getElementById(`${x}.${y}`).innerHTML = plot.toString();
-                document.getElementById(`${x}.${y}`).style.backgroundColor = plot.isBurning() ? 'red' : 'green';
+                // document.getElementById(`${x}.${y}`).innerHTML = plot.toString();
+                document.getElementById(`${x}.${y}`).style.backgroundColor = plot.isBurning() ? '#e25822' : plot.color;
             }
         }
     }
@@ -57,6 +57,8 @@ export class Area {
         const randomX = Math.floor(Math.random() * this._size);
         const randomY = Math.floor(Math.random() * this._size);
         let randomPlot = this._plots[randomX][randomY];
+
+        console.log(randomPlot)
 
         if(randomPlot.isFlammable() == false || randomPlot.isBurning() == true){
             this.setFireRandomly();
