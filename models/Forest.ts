@@ -7,6 +7,6 @@ export class Forest extends Plot {
     }
 
     toString(): string {
-        return "Forest:" + super.toString();
+        return 'Forest';
     }
 }

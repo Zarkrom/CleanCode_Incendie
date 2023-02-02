@@ -1,11 +1,17 @@
 import {Direction} from "./Direction";
 
 export class Wind {
-    force: number;
-    direction: Direction;
+    directions: Direction[];
 
-    constructor() {
-        // Generate a random number between 0 & 5
-        this.force = Math.floor(Math.random() * 5);
+    constructor(...directions: Direction[]) {
+        if(directions.length === 0){
+            this.directions = [Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST];
+        } else {
+            this.directions = directions;
+        }
+    }
+
+    getDirections(): Direction[] {
+        return this.directions;
     }
 }

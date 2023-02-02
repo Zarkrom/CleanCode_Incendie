@@ -7,6 +7,6 @@ export class Water extends Plot {
     }
 
     toString(): string {
-        return "Water:" + super.toString();
+        return 'Water';
     }
 }

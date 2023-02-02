@@ -4,7 +4,6 @@
   "description": "",
   "source": "./index.html",
   "moduleResolution":"node",
-
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start": "parcel",

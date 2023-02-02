@@ -7,6 +7,6 @@ export class Field extends Plot {
     }
 
     toString(): string {
-        return "Field:" + super.toString();
+        return 'Field';
     }
 }
